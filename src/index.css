@@ -1,0 +1,238 @@
+@import url("https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Windows 11 Design System */
+
+@layer base {
+  :root {
+    /* Windows 11 Light Theme */
+    --background: 220 14% 96%;
+    --foreground: 0 0% 7%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+
+    --primary: 207 90% 54%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 93%;
+    --secondary-foreground: 0 0% 20%;
+
+    --muted: 220 14% 90%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 207 90% 54%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 14% 86%;
+    --input: 220 14% 86%;
+    --ring: 207 90% 54%;
+
+    --radius: 0.5rem;
+
+    /* Windows 11 Specific */
+    --win-mica: 0 0% 100% / 0.7;
+    --win-acrylic: 0 0% 100% / 0.8;
+    --win-taskbar: 0 0% 100% / 0.85;
+    --win-window: 0 0% 100%;
+    --win-titlebar: 0 0% 98%;
+    --win-hover: 0 0% 0% / 0.04;
+    --win-active: 0 0% 0% / 0.06;
+    --win-selected: 207 90% 54% / 0.15;
+    --win-border: 0 0% 0% / 0.08;
+
+    /* Shadows */
+    --shadow-window: 0 8px 32px hsl(0 0% 0% / 0.15), 0 2px 8px hsl(0 0% 0% / 0.1);
+    --shadow-popup: 0 4px 16px hsl(0 0% 0% / 0.12);
+    --shadow-taskbar: 0 -2px 8px hsl(0 0% 0% / 0.08);
+
+    /* Chart colors */
+    --chart-1: 207 90% 54%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+
+    --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 15%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 207 90% 61%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 207 90% 61%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 22%;
+    --input: 0 0% 22%;
+    --ring: 207 90% 61%;
+
+    /* Windows 11 Dark Theme */
+    --win-mica: 0 0% 8% / 0.85;
+    --win-acrylic: 0 0% 12% / 0.8;
+    --win-taskbar: 0 0% 12% / 0.9;
+    --win-window: 0 0% 15%;
+    --win-titlebar: 0 0% 13%;
+    --win-hover: 0 0% 100% / 0.06;
+    --win-active: 0 0% 100% / 0.08;
+    --win-selected: 207 90% 61% / 0.2;
+    --win-border: 0 0% 100% / 0.08;
+
+    --chart-1: 207 90% 65%;
+    --chart-2: 160 60% 55%;
+    --chart-3: 30 80% 60%;
+    --chart-4: 280 65% 65%;
+    --chart-5: 340 75% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    overflow: hidden;
+  }
+
+  /* Custom scrollbar for Windows 11 look */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+}
+
+@layer utilities {
+  .win-mica {
+    background: hsl(var(--win-mica));
+    backdrop-filter: blur(60px) saturate(150%);
+  }
+
+  .win-acrylic {
+    background: hsl(var(--win-acrylic));
+    backdrop-filter: blur(40px) saturate(125%);
+  }
+
+  .win-window {
+    background: hsl(var(--win-window));
+    box-shadow: var(--shadow-window);
+    border: 1px solid hsl(var(--win-border));
+    border-radius: 8px;
+  }
+
+  .win-taskbar {
+    background: hsl(var(--win-taskbar));
+    backdrop-filter: blur(40px) saturate(150%);
+    box-shadow: var(--shadow-taskbar);
+  }
+
+  .win-titlebar {
+    background: hsl(var(--win-titlebar));
+  }
+
+  .win-hover {
+    transition: background 0.1s ease;
+  }
+
+  .win-hover:hover {
+    background: hsl(var(--win-hover));
+  }
+
+  .win-active:active {
+    background: hsl(var(--win-active));
+  }
+
+  .win-selected {
+    background: hsl(var(--win-selected));
+  }
+
+  .win-border {
+    border: 1px solid hsl(var(--win-border));
+  }
+
+  /* Window animations */
+  @keyframes windowOpen {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes windowClose {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  @keyframes startMenuOpen {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .animate-window-open {
+    animation: windowOpen 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-window-close {
+    animation: windowClose 0.15s ease-out forwards;
+  }
+
+  .animate-start-menu {
+    animation: startMenuOpen 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
