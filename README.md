@@ -1,6 +1,6 @@
 # Amin Adineh Workflow
 
-A Windows 11-inspired web-based operating system environment built as a test machine for future online OS development.
+A Windows 11-inspired web-based operating system environment built as a test machine for future online OS development with React. Just for Fun!
 
 ## About
 
