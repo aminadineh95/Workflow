@@ -29,11 +29,13 @@ jobs:
           echo "Base path in vite.config.ts: /My-Workflow/"
           echo ""
           echo "⚠️  Make sure the repository name matches the base path!"
-          if [ "${{ github.event.repository.name }}" != "My-Workflow" ]; then
+          if [ "${{ github.event.repository.name }}" != "Workflow" ]; then
             echo "⚠️  WARNING: Repository name doesn't match base path!"
             echo "   Repository: ${{ github.event.repository.name }}"
-            echo "   Expected: My-Workflow"
+            echo "   Expected: Workflow"
             echo "   Update vite.config.ts base path if needed"
+          else
+            echo "✅ Repository name matches base path!"
           fi
 
       - name: Setup Node.js

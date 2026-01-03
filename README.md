@@ -80,10 +80,10 @@ The workflow will:
 
 Once deployed, your site will be available at:
 ```
-https://[your-username].github.io/My-Workflow/
+https://[your-username].github.io/Workflow/
 ```
 
-Make sure the repository name matches the base path in `vite.config.ts`.
+**Important**: The repository name must be `Workflow` to match the base path in `vite.config.ts`.
 
 ---
 
