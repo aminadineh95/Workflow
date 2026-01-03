@@ -21,6 +21,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Verify repository configuration
+        run: |
+          echo "📋 Repository Information:"
+          echo "Repository: ${{ github.repository }}"
+          echo "Repository Name: ${{ github.event.repository.name }}"
+          echo "Base path in vite.config.ts: /My-Workflow/"
+          echo ""
+          echo "⚠️  Make sure the repository name matches the base path!"
+          if [ "${{ github.event.repository.name }}" != "My-Workflow" ]; then
+            echo "⚠️  WARNING: Repository name doesn't match base path!"
+            echo "   Repository: ${{ github.event.repository.name }}"
+            echo "   Expected: My-Workflow"
+            echo "   Update vite.config.ts base path if needed"
+          fi
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -31,9 +46,13 @@ jobs:
         run: npm ci
 
       - name: Build project
-        run: npm run build
+        run: |
+          echo "🔨 Building project..."
+          npm run build
+          echo "✅ Build completed"
         env:
           NODE_ENV: production
+          CI: false
 
       - name: Verify build output
         run: |
@@ -51,12 +70,30 @@ jobs:
           echo ""
           echo "📊 Build size:"
           du -sh dist/
+          echo ""
+          echo "🔍 Checking index.html content:"
+          head -30 dist/index.html
+          echo ""
+          echo "🔍 Checking for assets:"
+          ls -la dist/assets/ 2>/dev/null || echo "No assets folder found"
 
       - name: Setup 404 page for SPA routing
         run: cp dist/index.html dist/404.html
 
       - name: Create .nojekyll file
-        run: touch dist/.nojekyll
+        run: |
+          touch dist/.nojekyll
+          echo "Created .nojekyll file"
+          ls -la dist/.nojekyll
+
+      - name: Verify final build structure
+        run: |
+          echo "📁 Final dist structure:"
+          find dist -type f -name "*.html" -o -name "*.js" -o -name "*.css" | head -30
+          echo ""
+          echo "📄 Checking index.html paths:"
+          grep -o 'src="[^"]*"' dist/index.html | head -10 || true
+          grep -o 'href="[^"]*"' dist/index.html | head -10 || true
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -76,3 +113,18 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Deployment Summary
+        run: |
+          echo "🚀 Deployment completed!"
+          echo "📦 Repository: ${{ github.repository }}"
+          echo "🌐 Deployed URL: ${{ steps.deployment.outputs.page_url }}"
+          echo ""
+          echo "✅ Your site should be available at:"
+          echo "   ${{ steps.deployment.outputs.page_url }}"
+          echo ""
+          echo "⚠️  If you see a blank page:"
+          echo "   1. Check browser console (F12) for errors"
+          echo "   2. Verify repository name matches base path in vite.config.ts"
+          echo "   3. Make sure GitHub Pages source is set to 'GitHub Actions'"
+          echo "   4. See DEPLOYMENT_TROUBLESHOOTING.md for more help"
