@@ -43,7 +43,47 @@ npm run build
 
 ## Deployment
 
-This project is configured for deployment on GitHub Pages.
+This project is configured for automatic deployment to GitHub Pages using GitHub Actions.
+
+### Automatic Deployment
+
+The project uses GitHub Actions to automatically build and deploy to GitHub Pages when you push to the `main` or `master` branch.
+
+**Setup Instructions:**
+
+1. Go to your repository on GitHub
+2. Navigate to **Settings** → **Pages**
+3. Under **Source**, select **GitHub Actions** (not "Deploy from a branch")
+4. The workflow will automatically run on every push to `main`/`master` branch
+
+### Manual Deployment
+
+You can also trigger the deployment manually:
+
+1. Go to **Actions** tab in your repository
+2. Select **Deploy to GitHub Pages** workflow
+3. Click **Run workflow** → **Run workflow**
+
+### Build Configuration
+
+- **Base Path**: `/My-Workflow/` (configured in `vite.config.ts`)
+- **Build Output**: `dist/` directory
+- **Node Version**: 20 (configured in workflow)
+
+The workflow will:
+- Install dependencies using `npm ci`
+- Build the project for production
+- Create a 404.html for SPA routing
+- Deploy to GitHub Pages automatically
+
+### Accessing Your Deployed Site
+
+Once deployed, your site will be available at:
+```
+https://[your-username].github.io/My-Workflow/
+```
+
+Make sure the repository name matches the base path in `vite.config.ts`.
 
 ---
 
